@@ -1,68 +1,19 @@
-# overextended-skills
+# fivem-skill
+
+## 1.0.0
+
+### Major Changes
+
+- Initial official release of **`fivem-skill`** by [@seba3567](https://github.com/seba3567):
+  - **`fivem-development`**: Comprehensive FiveM skill including 7,379 live natives from CitizenFX, official game references from `citizenfx/fivem-docs` (controls, blips, peds, weapons, game events, zones, markers), and Python CLI tools (`natives.py`, `build_natives_catalog.py`, `audit.py`).
+  - **Custom ox_inventory Support**: Exhaustive documentation of ChilencyRP custom ox_inventory fork (physical vehicle keys with plate metadata in glovebox, smelting furnace API, weapon ballistic telemetries, and compatibility layers for `qb-inventory` and `origen_inventory`).
+  - **Zero-Hard-Dependency Architecture**: Flexible adapters for resources that don't enforce `ox_lib` or `ox_inventory`, providing clean standalone and framework fallbacks.
+  - **Direct-Rendered UI (DUI) & Render Targets**: World 3D screens, billboards, and interactive handheld tablets with mouse input simulation.
+  - **Curated FiveM Core**: Specialized skills including `deslop`, `lua-best-practices`, `resource-best-practices`, `typescript-best-practices`, `tdd`, and `setup-ox`.
+  - **Modern CI/CD**: Workflows upgraded to Node.js 24 and pinned to Ubuntu 24.04 LTS.
 
 ## 0.2.1
 
 ### Patch Changes
 
-- [`b5be62c`](https://github.com/overextended/skills/commit/b5be62cb31e1a778bc740fdfb8d702891828315c) Thanks [@FjamZoo](https://github.com/FjamZoo)! - **`resource-best-practices`** loads again. Its `description` held an unquoted colon, so harnesses failed to parse the frontmatter and skipped the skill.
-
-## 0.2.0
-
-### Minor Changes
-
-- [`c9e7dfb`](https://github.com/overextended/skills/commit/c9e7dfb743ab35de595a2bb1721f15f1c12b87bd) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`resource-best-practices`** (model-invoked) to the **FiveM** bucket, for creating, editing and reviewing resource code on any framework. It covers the standard practice that isn't security: spawning entities client-side and non-networked unless they must be shared (then on the server), requesting network control only when the server whitelists the entity, working with networked sounds, ragdoll requests and script entity states blocked, cleaning up on player drop and resource stop, events over loops, copying `source` before a yield, targeted network sends and small state bags, and parameterised, limited, atomic SQL.
-
-### Patch Changes
-
-- [`3ed1350`](https://github.com/overextended/skills/commit/3ed1350ac8e69244b7f96ca12ac92ca5e7324975) Thanks [@FjamZoo](https://github.com/FjamZoo)! - **`lua-best-practices`** and **`resource-best-practices`** no longer contradict each other: their loop examples read `cache.ped` instead of `PlayerPedId()`, and `resource-best-practices` now uses `lib.points` for "do something near a location" instead of a hand-written distance loop.
-
-- [`c9e7dfb`](https://github.com/overextended/skills/commit/c9e7dfb743ab35de595a2bb1721f15f1c12b87bd) Thanks [@FjamZoo](https://github.com/FjamZoo)! - **`ox-mode`** now calls **`resource-best-practices`** whenever it writes or reviews a resource's client or server code, alongside `lua-best-practices` and `typescript-best-practices`.
-
-## 0.1.0
-
-### Minor Changes
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`architect`** (model-invoked) to the **Productivity** bucket. It grounds a design with `how` and `why`, gets at least two structurally different sketches through `arena`, screens them for design red flags, and implements against the synthesized sketch, scrapping it if implementation keeps fighting it. Adapted from pstack-t3's `architect` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`arena`** (model-invoked) to the **Productivity** bucket. It runs one task as several candidates on the `panel` models, has a `review` model on another family judge them against a rubric, picks the strongest as the base and grafts the best ideas of the others into it. Code-writing candidates each get their own git worktree. Adapted from pstack-t3's `arena` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`deslop`** (model-invoked) to the new **FiveM** bucket. It removes AI-generated slop from the lines a branch introduced in Lua, TypeScript or JavaScript resource code, without changing behaviour, and never removes server-side checks on data from clients. Adapted from cursor-team-kit's `deslop` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`figure-it-out`** (model-invoked) to the **Productivity** bucket. For a large task no other workflow covers, it states a checkable definition of done, designs a phase list with rigor scaled to the risk, runs it one verified unit at a time, and keeps a decision trail. Adapted from pstack-t3's `figure-it-out` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`how`** (model-invoked) to the **Productivity** bucket. `/how <question>` explains how a resource or subsystem works: overview, key concepts, the flow step by step across client, server and NUI, where things live, and gotchas. Narrow questions get one read-only subagent; bigger ones get two to four explorers on the `explore` model and an explainer on the `hardest tasks` model from `~/.config/ox/models.md`. Resources you don't own are read from the copy your server runs. Adapted from pstack-t3's `how` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`interrogate`** (model-invoked) to the **Productivity** bucket. Reviewers on the `panel` models challenge a change independently, and a lead judgment sorts their findings into act on, consider, noted and dismissed. The rubric includes FiveM security: server code trusting client data, client-triggerable rewards, SQL outside oxmysql parameters. Adapted from pstack-t3's `interrogate` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`lua-best-practices`** (model-invoked) to the **FiveM** bucket. It loads for `.lua` files and teaches how Overextended structures resources on ox_lib: `require` for code modules, `lib.load` and `lib.loadJson` for data, one entry script per side, convars for config, ox_lib's `cache`, `lib.onCache`, points, callbacks and locales, and the CfxLua syntax ox resources use. Checked against ox_lib 3.40.3 and ox_inventory 2.48.0.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`no-comments`** (model-invoked) to the **Productivity** bucket. A fresh reviewer on the `review` model deletes the comments in a diff that the code should make unnecessary and flags the code behind them, then the agent fixes it. License headers, comments about natives or resources you don't own, LuaLS annotations and public API docs stay. Adapted from pstack-t3's `no-comments` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`ox-mode`** (user-invoked) to the **Productivity** bucket. `/ox-mode` switches the agent into one working style for the session: it matches each task to a playbook (Investigation, Bug fix, Feature, Refactoring, Prototype, Authoring a skill, Eval, Autonomous run, Multi-phase plan, Session pickup, Pause safely, Worktree cleanup, Opening a PR), routes to the other skills at the steps that need them, verifies only with checks it can run itself, and writes short replies that cite the principles behind each decision. Babysit, Shipping, Orchestrate, Autopilot-full and Autopilot-stack run in T3 Code, using `gh` and plain-file state. Adapted from pstack-t3's `poteto-mode` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`pr`** (model-invoked) to the **Productivity** bucket. It writes pull request bodies in three sections: a Summary that shows the change as a call tree, file tree, Mermaid diagram or small diff, Evidence with a before and after, and Merge Danger, which names whether the change is a one-way door (a dropped column, a renamed item) and its blast radius. It follows the repo's own pull request template when there is one. Adapted from Matt Pocock's `pr` and Humanlayer's `show-me` (both MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`principles`** (model-invoked) to the **Productivity** bucket: 23 engineering principles (Laziness Protocol, Model the Domain, Boundary Discipline, Prove It Works, Fix Root Causes and more), each in its own file behind a short index, with FiveM boundaries, LuaLS types and resource restarts worked in. Adapted from pstack-t3's principle skills (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`retro`** (user-invoked) to the **Productivity** bucket. It reads a coding session's log and suggests changes to the agent's environment, ordered by severity: navigation pointers, automated checks (LuaLS with fivem-lls-addon for Lua), review rules, oversized `AGENTS.md` files, expensive tool calls, no-op instructions and missing information. Adapted from Matt Pocock's `retro` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`setup-ox`** (user-invoked), run once before the other ox skills:
-
-  - **Models and budget**: pick `unlimited`, `large`, `medium` or `small`, and it maps each subagent role (`explore`, `verify api`, `implement`, `review`, `hardest tasks`) to a model and reasoning level your harness offers, written to `~/.config/ox/models.md`.
-  - **Project**: it detects the server root, every ox resource and its version, the framework and the language your resources use, confirms them with you, and writes `.ox/config.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`show-me-your-work`** (model-invoked) to the **Productivity** bucket. It keeps an append-only TSV decision log for long or unattended work, audits it against the session transcript before handing back, and has a reviewer on another model flag what to look at. Adapted from pstack-t3's `show-me-your-work` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`swarm`** (model-invoked) to the **Productivity** bucket. It fans a task out to parallel subagents, as slices, a race, or both, and returns one report with an evidenced `PASS`, `ISSUES` or `BLOCKED` per worker and explicit gaps. Adapted from pstack-t3's `swarm` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`tdd`** (model-invoked) to the **FiveM** bucket. It fixes bugs in TypeScript resources test-first, with natives and ox_lib mocked so no FiveM server is needed, and falls back to a check the agent can run itself when a test would be impractical. Adapted from pstack-t3's `tdd` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`typescript-best-practices`** (model-invoked) to the **FiveM** bucket. It loads for `.ts`, `.tsx` and `.svelte` files and teaches discriminated unions, branded ids, `unknown` over `any`, plain-TypeScript parse functions, exhaustive switches and validated casts, with a section on parsing data at FiveM's untyped boundaries: net events, ox_lib callbacks, NUI callbacks, exports and state bags. Adapted from pstack-t3's `typescript-best-practices` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`unslop`** (user-invoked) in a new **Productivity** bucket. It rewrites any text to cut AI tells: AI vocabulary, filler, hedging, mannered prose, em dashes and over-compression, with stable rule numbers other skills can cite.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`why`** (model-invoked) to the **Productivity** bucket. Read-only investigators search git history, PRs, issues and any docs, chat or monitoring MCP the agent has, and a synthesizer returns a cited answer with every claim labelled by confidence. Resources the server runs but doesn't own are traced through their upstream repository at the version the server runs. Adapted from pstack-t3's `why` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - Add **`writing-for-agents`** (model-invoked) to the **Productivity** bucket. It's a reference for writing skills, `AGENTS.md` and `CLAUDE.md`: wording the pointers that load material, deciding what stays inline and what moves to a linked file, giving each step a checkable end, and pruning lines that don't change behaviour. Adapted from Matt Pocock's `writing-for-agents` (MIT), credited in the skill's `CREDITS.md`.
-
-- [`ece4904`](https://github.com/overextended/skills/commit/ece490429632a697de2d812e2f02b8dcafff0e51) Thanks [@FjamZoo](https://github.com/FjamZoo)! - `setup-ox` adds a **`panel`** role: a list of models that run one task side by side, used by `arena`, `architect` and `interrogate`. It defaults to the most capable model of each provider your harness offers, up to three. In T3 Code, the panel can span providers.
+- [`b5be62c`](https://github.com/overextended/skills/commit/b5be62cb31e1a778bc740fdfb8d702891828315c) - `resource-best-practices` frontmatter fix.
