@@ -8,6 +8,7 @@ It covers:
 - **Official CitizenFX Game References**: Controls IDs, Blips, Hashes, Game Events, Zones, Markers
 - **Framework Support**: Qbox, ESX Legacy, QBCore, Standalone and Overextended
 - **Custom ox_inventory**: Support for physical vehicle keys, smelting furnaces, ballistic stats, and compatibility layers
+- **Direct-Rendered UI (DUI) & Render Targets**: Rendering Chromium webviews onto 3D world objects, cinema screens, billboards, and interactive handheld tablets
 - **Zero-Hard-Dependency Architecture**: Flexible adapters for resources that don't enforce ox_lib or ox_inventory
 - **Security & OneSync**: Server-authoritative validation, bucket routing, state bags, exploit mitigation, and audit scripts
 

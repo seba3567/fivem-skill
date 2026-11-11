@@ -51,7 +51,8 @@ FXServer Legacy Recommended **35245** / Latest 37150 (clients can't join older b
 | Most-used natives by task (verified signatures, control IDs, game references) | [natives-essentials.md](references/natives-essentials.md) |
 | Game references (blips, controls, peds, weapons, zones, hud colors, markers) | [game-references](references/game-references/_index.md) |
 | Any native at all (7,379, by namespace) | `assets/natives/README.md` → `assets/natives/<NAMESPACE>.md` |
-| UI / HUD / menus in HTML (NUI), loading screens, DUI | [nui.md](references/nui.md) |
+| UI / HUD / menus in HTML (NUI), loading screens | [nui.md](references/nui.md) |
+| Direct-Rendered UI (DUI): 3D screens, billboards, tablets, render targets | [dui-and-render-targets.md](references/dui-and-render-targets.md) |
 | Editor, LuaLS addon, lint, format, bundlers, CI | [tooling.md](references/tooling.md) |
 | Errors, crashes, console commands, logs | [debugging.md](references/debugging.md) |
 | Reading console / txAdmin logs (script errors, load failures, escrow entitlement, hitches, slow queries, oversized assets, removed convars) | [console-logs.md](references/console-logs.md) |
