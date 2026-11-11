@@ -1,135 +1,64 @@
-# Overextended Skills
+# FiveM Skills
 
-Agent skills for building FiveM resources with the [Overextended](https://github.com/overextended) stack: ox_lib, ox_core, ox_inventory, ox_target, oxmysql, and general FiveM resource development.
+Colección definitiva y optimizada de habilidades de agente de IA para el desarrollo de servidores y recursos de **FiveM (Cfx.re / GTA V)**.
 
-Coding agents know Lua. They don't know which ox_lib module replaces the boilerplate you were about to write, what `exports.ox_inventory` actually exposes, or which pattern a resource stopped supporting two versions ago. These skills give the agent that knowledge, checked against the resources' source, so it writes code the way the people who built the stack would.
+Diseñado para agentes de programación (Claude Code, Gemini CLI, Antigravity, Cursor, Codex, OpenCode) que interactúan con código Lua 5.4, TypeScript, NUI y frameworks FiveM.
 
-They work with Claude Code, Codex, Copilot, Gemini CLI, Cursor and any other agent that reads the [Agent Skills](https://agentskills.io) format.
+---
 
-## Installation
+## 🚀 Contenido y Habilidades
 
-Pick one route per agent. Installing both the plugin and skills.sh gives you every skill twice.
+### 1. `fivem-development` (Núcleo Principal)
+El skill más exhaustivo y actualizado para el desarrollo en FiveM:
+- **7,379 Nativas Oficiales Sincronizadas**: Compiladas en vivo desde las bases de datos oficiales de `citizenfx/fivem` (`static.cfx.re` y `runtime.fivem.net`) divididas en 47 namespaces markdown.
+- **Referencias de Juego Oficiales**: Extraídas de `citizenfx/fivem-docs` (Controls IDs, Blips, Hashes de Peds, Hashes de Armas, Game Events, Zones, Markers).
+- **Soporte para ox_inventory Personalizado**: Documentación completa del inventario personalizado de ChilencyRP (sistema físico de llaves de vehículos en guantera, hornos/fundición térmicos, telemetría balística, compatibilidad con `qb-inventory` y `origen_inventory`).
+- **Arquitectura Flexible (*Zero-Hard-Dependency*)**: Patrón puente y adaptadores para crear recursos que no requieran obligatoriamente `ox_lib` ni `ox_inventory`, con fallbacks limpios a QBCore, ESX o Standalone nativo.
+- **Frameworks Soportados**: Qbox, ESX Legacy, QBCore y Standalone.
+- **Seguridad y Rendimiento**: Reglas estrictas de validación de servidor (`source`), mitigación de exploits, OneSync infinity y optimización de loops.
 
-<details>
-<summary><strong>Claude Code</strong></summary>
+### 2. Habilidades FiveM Especializadas (Overextended Stack)
+- **`deslop`**: Limpieza de código generado por IA eliminando redundancias sin alterar validaciones críticas de servidor.
+- **`lua-best-practices`**: Buenas prácticas oficiales de CfxLua 5.4, imports modulares (`require`), convars y arquitectura de scripts.
+- **`resource-best-practices`**: Manejo de entidades OneSync, ciclo de vida de entidades en servidor, state bags y control de red.
+- **`typescript-best-practices`**: Estándares para NUI y recursos construidos en TypeScript/JavaScript.
+- **`tdd`**: Desarrollo guiado por pruebas para recursos complejos.
+- **`setup-ox`**: Configuración asistida del entorno de servidor y selección de modelos.
 
+---
+
+## 📦 Instalación
+
+### En Gemini / Antigravity
+Copia o enlaza las carpetas a tu directorio de configuración de skills:
 ```bash
-claude plugin marketplace add overextended/skills
-claude plugin install overextended-skills@overextended
+git clone git@github.com:seba3567/fivem-skill.git
+```
+Y añade `skills/fivem/fivem-development` a `~/.gemini/config/skills/`.
+
+### En Claude Code / Codex
+```bash
+claude plugin marketplace add seba3567/fivem-skill
 ```
 
-To update, run `claude plugin update overextended-skills@overextended`, or turn on auto-update for the `overextended` marketplace in `/plugin`.
+---
 
-</details>
+## 🛠️ Herramientas CLI Incluidas (Python 3.8+)
 
-<details>
-<summary><strong>Codex</strong></summary>
-
-```bash
-codex plugin marketplace add overextended/skills
-codex plugin add overextended-skills@overextended
-```
-
-</details>
-
-<details>
-<summary><strong>GitHub Copilot</strong> (CLI)</summary>
-
-```bash
-copilot plugin marketplace add overextended/skills
-copilot plugin install overextended-skills@overextended
-```
-
-</details>
-
-<details>
-<summary><strong>Gemini CLI</strong> (manual updates)</summary>
-
-```bash
-gemini skills install https://github.com/overextended/skills.git --path skills/ox
-gemini skills install https://github.com/overextended/skills.git --path skills/fivem
-gemini skills install https://github.com/overextended/skills.git --path skills/productivity
-```
-
-Re-run all three commands to update.
-
-</details>
-
-<details>
-<summary><strong>Any other agent, or editable files</strong> (manual updates)</summary>
-
-```bash
-npx skills@latest add overextended/skills -a <agent>  # cursor, opencode, windsurf, ...; omit -a to choose
-```
-
-To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
-
-</details>
-
-## Getting started
-
-Run `/setup-ox` once in your server (or resource) folder. It does two things:
-
-1. **Models and budget.** You pick a budget (`unlimited`, `large`, `medium`, `small`), and it maps each subagent role (exploring, checking APIs, implementing, reviewing, hard problems, and a panel of models for side-by-side work) to a model and reasoning level your agent actually offers. Saved to `~/.config/ox/models.md`, for you only.
-2. **Project.** It finds your server, reads which ox resources, versions and framework you run, and confirms them with you. Saved to `.ox/config.md` in the server, for everyone on the project.
-
-Every other skill reads both files, so it spends what you chose and writes code for the versions you actually have. Re-run `/setup-ox models` or `/setup-ox project` to redo one half.
-
-Then, for a session where you want the full process (a playbook per task, delegated implementation, design bakeoffs, verified work), start it with `/ox-mode`.
-
-## Skills
-
-Skills split on one axis: who can invoke them. **Model-invoked** skills can be typed by you _or_ reached for automatically by the agent when the task fits. **User-invoked** skills run only when you type them.
-
-### ox
-
-One skill per Overextended resource, plus project setup.
-
-**User-invoked**
-
-- **[setup-ox](./skills/ox/setup-ox/SKILL.md)**: Configure these skills: pick a model and reasoning level per subagent role within a budget, then detect your server's ox resources, versions and framework.
-
-### FiveM
-
-FiveM resource development in general, independent of the ox stack.
-
-**Model-invoked**
-
-- **[deslop](./skills/fivem/deslop/SKILL.md)**: Remove AI-generated slop from resource code without changing behaviour, keeping every server-side check on client data.
-- **[lua-best-practices](./skills/fivem/lua-best-practices/SKILL.md)**: Structure resource Lua the way Overextended does: when to use `require`, `lib.load` or `lib.loadJson`, one entry script per side, convars for config, and ox_lib's `cache`, points and callbacks.
-- **[resource-best-practices](./skills/fivem/resource-best-practices/SKILL.md)**: Standard FiveM practice beyond security: spawn entities client-side unless they must be networked, take network control only when the server whitelists it, clean up after players and restarts, and keep loops, network traffic and SQL lean.
-- **[tdd](./skills/fivem/tdd/SKILL.md)**: Fix bugs in TypeScript resources test-first, with natives and ox_lib mocked so no server is needed.
-- **[typescript-best-practices](./skills/fivem/typescript-best-practices/SKILL.md)**: Type resources and their NUI so impossible states don't compile, and parse everything that arrives through net events, callbacks, exports and state bags.
-
-### Productivity
-
-General workflow tools, not specific to FiveM or the ox stack.
-
-**User-invoked**
-
-- **[ox-mode](./skills/productivity/ox-mode/SKILL.md)**: Work in the Overextended style for the session: one playbook per task, delegated and verified work, short replies that cite their principles.
-- **[retro](./skills/productivity/retro/SKILL.md)**: Look back at a coding session and suggest changes to the agent's environment: pointers, checks, review rules and instructions to cut.
-- **[unslop](./skills/productivity/unslop/SKILL.md)**: Cut AI tells from any writing: filler, AI vocabulary, mannered prose, em dashes, over-compression.
-
-**Model-invoked**
-
-- **[architect](./skills/productivity/architect/SKILL.md)**: Design before coding: several candidate sketches from different models, screened for red flags, then implemented against the chosen one.
-- **[arena](./skills/productivity/arena/SKILL.md)**: Run one task as several candidates on different models, pick the strongest and graft in the best of the rest.
-- **[figure-it-out](./skills/productivity/figure-it-out/SKILL.md)**: Design and run a checkable, logged workflow for a large task no other skill covers.
-- **[how](./skills/productivity/how/SKILL.md)**: Explain how a resource or subsystem works: architecture, the flow across client, server and NUI, and where things live.
-- **[interrogate](./skills/productivity/interrogate/SKILL.md)**: Adversarial review of a change by reviewers on different models, sorted into what to act on and what to dismiss.
-- **[no-comments](./skills/productivity/no-comments/SKILL.md)**: Delete the comments in a diff that the code should make unnecessary, then fix the code they were covering for.
-- **[pr](./skills/productivity/pr/SKILL.md)**: Write a PR body that's fast to review: the change as a diagram or small diff, before-and-after evidence, and whether the merge can be rolled back.
-- **[principles](./skills/productivity/principles/SKILL.md)**: 23 engineering principles for building, verifying and delegating work, each read only when the task calls for it.
-- **[show-me-your-work](./skills/productivity/show-me-your-work/SKILL.md)**: Keep a decision log for long or unattended work, audited against the transcript and reviewed by another model.
-- **[swarm](./skills/productivity/swarm/SKILL.md)**: Fan a task out to parallel subagents as slices or a race, and return one evidenced report.
-- **[why](./skills/productivity/why/SKILL.md)**: Find why code is the way it is, from git history, PRs, issues and docs, with every claim cited and labelled by confidence.
-- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Write skills, `AGENTS.md` and `CLAUDE.md` so the agent takes the same path every run: sharp pointers, the right things inline, checkable steps, no lines that change nothing.
-
-## Contributing
-
-Found a skill that made your agent write the wrong thing? [Open an issue](https://github.com/overextended/skills/issues/new/choose). To add a skill, follow [`.agents/new-skill.md`](./.agents/new-skill.md).
-
-## License
-
-[GPL-3.0](./LICENSE)
+En `skills/fivem/fivem-development/scripts/`:
+- **Búsqueda instantánea de nativas**:
+  ```bash
+  python scripts/natives.py search <NombreDeNativa>
+  ```
+- **Detalle de nativa**:
+  ```bash
+  python scripts/natives.py show <NombreExacto>
+  ```
+- **Actualizar catálogo desde CitizenFX**:
+  ```bash
+  python scripts/build_natives_catalog.py --refresh
+  ```
+- **Auditoría de seguridad y backdoors en recursos**:
+  ```bash
+  python scripts/audit.py /ruta/a/recurso
+  ```
