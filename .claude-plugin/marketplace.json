@@ -1,15 +1,15 @@
 {
-  "name": "overextended",
+  "name": "seba3567",
   "owner": {
-    "name": "Overextended",
-    "url": "https://github.com/overextended"
+    "name": "seba3567",
+    "url": "https://github.com/seba3567"
   },
-  "description": "Overextended's agent skills for FiveM development, as an installable plugin.",
+  "description": "Agent skills for FiveM development, as an installable plugin.",
   "plugins": [
     {
-      "name": "overextended-skills",
+      "name": "fivem-skill",
       "source": "./",
-      "description": "Agent skills for building FiveM resources with ox_lib, ox_core, ox_inventory, ox_target and oxmysql.",
+      "description": "Agent skills for building FiveM resources with ox_lib, ox_core, ox_inventory, ox_target, oxmysql, QBCore, ESX and Standalone.",
       "category": "development",
       "keywords": [
         "fivem",

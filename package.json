@@ -1,11 +1,11 @@
 {
-  "name": "overextended-skills",
+  "name": "fivem-skill",
   "version": "0.2.1",
   "private": true,
-  "description": "Agent skills for building FiveM resources with the Overextended stack",
+  "description": "Agent skills for building FiveM resources with the Overextended stack, QBCore, ESX, and general FiveM resource development",
   "repository": {
     "type": "git",
-    "url": "https://github.com/overextended/skills"
+    "url": "https://github.com/seba3567/fivem-skill"
   },
   "license": "GPL-3.0-or-later",
   "scripts": {
